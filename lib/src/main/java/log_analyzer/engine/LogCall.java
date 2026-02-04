@@ -21,4 +21,5 @@ public class LogCall {
     public int getLine() { return line; }
     public String getMethodFqn() { return methodFqn; }
     public List<Expression> getArgs() { return args; }
+
 }

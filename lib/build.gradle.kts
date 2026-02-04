@@ -12,6 +12,8 @@ repositories {
 }
 
 dependencies {
+	// YAML 로딩
+	implementation("org.yaml:snakeyaml:2.2")
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
@@ -24,6 +26,7 @@ dependencies {
 
     // YAML 로딩
     implementation("org.yaml:snakeyaml:2.2")
+
 }
 
 java {
