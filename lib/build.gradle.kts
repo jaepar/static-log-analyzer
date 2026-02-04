@@ -36,7 +36,7 @@ java {
 }
 
 application {
-    mainClass.set("dev.loganalyzer.cli.Main")
+    mainClass.set("log_analyzer.Main")
 }
 
 tasks.named<Test>("test") {
@@ -53,11 +53,11 @@ tasks.register<JavaExec>("staticLogAnalyze") {
     description = "Static logging analyzer (CWE-532) - fail on forbidden field logging"
 
     classpath = sourceSets.main.get().runtimeClasspath
-    mainClass.set("dev.loganalyzer.cli.Main")
+    mainClass.set("log_analyzer.Main")
 
     args(
         "--root=.",
-        "--policy=logging-policy.yml",
+        "--policy=src/main/resources/logging-policy.yml",
         "--report=build/logging-report/report.txt"
     )
 }
