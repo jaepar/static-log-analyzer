@@ -26,6 +26,8 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation(libs.guava)
+    
+    implementation ("com.github.javaparser:javaparser-symbol-solver-core:3.28.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
