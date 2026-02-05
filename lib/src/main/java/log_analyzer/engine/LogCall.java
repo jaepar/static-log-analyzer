@@ -4,6 +4,7 @@ import com.github.javaparser.ast.expr.Expression;
 import java.nio.file.Path;
 import java.util.List;
 
+//실제 사용된 log에 대한 정보를 저장하는 클래스
 public class LogCall {
     private final Path file;
     private final int line;

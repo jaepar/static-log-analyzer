@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// 루트 폴더부터 java 파일을 찾아 java 파일 경로를 리스트로 반환
 public class SourceScanner {
 
     public List<Path> findJavaFiles(Path root) {
