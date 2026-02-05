@@ -9,8 +9,8 @@ public class LoginService {
 
 	    public void login(String password, String token) {
 	    	// 위반되는 로그
-	        log.info("password = " + password);
-	        log.info("token = " + token);
+//	    	log.info("password" + password);
+//	    	log.info("token = " + token);
 	        
 	        log.info("test: " + "test");
 	        

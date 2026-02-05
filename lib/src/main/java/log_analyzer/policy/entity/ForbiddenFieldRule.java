@@ -20,6 +20,8 @@ public class ForbiddenFieldRule {
     public boolean matches(String text) {
         if (text == null) return false;
 
+        //match에서 검증 방식
+        //정확 일치, 포함 등
         return switch (match) {
             case EXACT -> text.equals(name);
             case CONTAINS -> text.contains(name);

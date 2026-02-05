@@ -5,6 +5,7 @@ import com.github.javaparser.ast.expr.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// java file에서 추출한 logger에 대하여 실제 작성된 변수 명, 텍스트 등을 작은 토큰 단위로 절단
 public class LogArgInspector {
 	/**
      * 로그 인자 표현식(Expression)에서 검사 가능한 토큰을 뽑는다.
