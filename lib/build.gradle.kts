@@ -26,6 +26,18 @@ dependencies {
 
     // YAML 로딩
     implementation("org.yaml:snakeyaml:2.2")
+    
+    // ===== Test =====
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
+    testImplementation("org.mockito:mockito-core:3.5.13")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.5.13")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // ===== Lombok =====
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 
 }
 
