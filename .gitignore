@@ -1,5 +1,4 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# build된 결과물이 저장되는 directory
+target/
 
-# Ignore Gradle build output directory
-build
+# 
