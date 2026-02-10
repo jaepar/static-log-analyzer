@@ -46,31 +46,26 @@ class PolicyLoaderTest {
     }
     
     @Test
-    @DisplayName("forbidden만 있으면 logMethods는 빈 리스트")
+    @DisplayName("forbiddenFields가 리스트가 아닌 경우 ParserException")
     void test2(@TempDir Path tempDir) throws IOException {
-    	// Given
         String yamlContent = """
-            forbiddenFields:
-              - name: password
-                match: exact
+            forbiddenFields: password
+            logMethods:
+              - log.info
             """;
         Path policyFile = tempDir.resolve("policy.yml");
         Files.writeString(policyFile, yamlContent);
         PolicyLoader loader = new PolicyLoader();
 
-        // When
-        LoggingPolicy policy = loader.load(policyFile);
-
-        // Then
-        assertNotNull(policy);
-        assertEquals(1, policy.getForbiddenFields().size());
-        assertTrue(policy.getLogMethods().isEmpty());
+        ParserException exception = assertThrows(ParserException.class, () -> {
+            loader.load(policyFile);
+        });
+        assertTrue(exception.getMessage().contains("forbiddenFields must be a list"));
     }
     
     @Test
     @DisplayName("forbiddenFields의 match 필드가 없으면 기본값은 exact로")
     void test3(@TempDir Path tempDir) throws IOException {
-        // Given
         String yamlContent = """
             forbiddenFields:
               - name: password
@@ -91,25 +86,17 @@ class PolicyLoaderTest {
     @Test
     @DisplayName("root가 Map이 아닌 경우")
     void test4(@TempDir Path tempDir) throws IOException {
-        // Given
         String yamlContent = """
-            forbiddenFields:
-              - name: password
-            """;
-        Path policyFile = tempDir.resolve("policy.yml");
-        Files.writeString(policyFile, yamlContent);
-        PolicyLoader loader = new PolicyLoader();
+                - item1
+                - item2
+                """;
+            Path policyFile = tempDir.resolve("policy.yml");
+            Files.writeString(policyFile, yamlContent);
+            PolicyLoader loader = new PolicyLoader();
 
-        // When
-        LoggingPolicy policy = loader.load(policyFile);
-
-        // Then
-        assertNotNull(policy);
-        assertEquals(1, policy.getForbiddenFields().size());
-        assertEquals(MatchType.EXACT, policy.getForbiddenFields().get(0).getMatch());
-    }
+            ParserException exception = assertThrows(ParserException.class, () -> {
+                loader.load(policyFile);
+            });
+            assertTrue(exception.getMessage().contains("root is not a map"));
+        }
 }
-
-
-
-
