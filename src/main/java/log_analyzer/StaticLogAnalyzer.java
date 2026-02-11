@@ -17,12 +17,26 @@ import log_analyzer.rules.ForbiddenFieldLoggingRule;
 // 정적 로그 검증
 public class StaticLogAnalyzer {
 	
-    // java 파일 스캐너
-	private final SourceScanner scanner = new SourceScanner();
-    //java 내부의 log 추출기
-    private final JavaLoggingCallExtractor extractor = new JavaLoggingCallExtractor();
-    //보고서 작성
-    private final ReportWriter reportWriter = new ReportWriter();
+	// java 파일 스캐너
+    private final SourceScanner scanner;
+    // java 내부의 log 추출기
+    private final JavaLoggingCallExtractor extractor;
+    // 보고서 작성
+    private final ReportWriter reportWriter;
+
+    // 기본 생성자
+    public StaticLogAnalyzer() {
+        this(new SourceScanner(), new JavaLoggingCallExtractor(), new ReportWriter());
+    }
+
+    // 테스트용 생성자
+    public StaticLogAnalyzer(SourceScanner scanner,
+                             JavaLoggingCallExtractor extractor,
+                             ReportWriter reportWriter) {
+        this.scanner = scanner;
+        this.extractor = extractor;
+        this.reportWriter = reportWriter;
+    }
 
     // 감지된 전달 log 명령어 탐지
     // 루트 경로와 규정을 저장한 클래스를 통해 실행
