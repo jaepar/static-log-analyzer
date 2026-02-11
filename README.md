@@ -85,6 +85,7 @@ log_analyzer
 └── Main.java               # CLI 실행 엔트리 포인트
 ```
 
+---
 ## 설정 및 사용 방법
 ### 1. 정책 파일 설정 (logging-policy.yml)
 프로젝트 루트 폴더에 위치하며, 보안 검사를 수행할 필드명과 로그 메서드를 Map 형태로 정의합니다.
@@ -116,6 +117,7 @@ Bash
 ### 3. 결과 보고서 확인
 분석이 완료되면 build/logging-report/report.txt 경로에서 상세 위반 내역을 확인할 수 있습니다.
 
+---
 ## 주요 기여 내용 (Individual Contribution)
 보안 정책 로더 및 데이터 모델링 (Policy Module)
 정책 로딩 시스템 구축: SnakeYAML 라이브러리를 활용해 텍스트 기반 설정 파일을 자바 객체로 변환하는 PolicyLoader를 구현했습니다
@@ -125,3 +127,110 @@ Bash
 예외 처리 및 유효성 검증: 파일 확장자 확인 로직을 추가하고 파싱 실패 시 명확한 에러 메시지를 제공하는 ParserException 체계를 구축했습니다.
 
 빌드 환경 최적화: 윈도우 환경에서 발생할 수 있는 한글 인코딩 문제를 해결하기 위해 Gradle 컴파일 옵션을 UTF-8로 표준화하여 협업 안정성을 확보했습니다.
+
+---
+##  테스트 코드 & 테스트 시나리오
+정적 분석 정확도와 정책 파싱 안정성 보장을 위해 핵심 모듈에 대해 단위 테스트를 작성했습니다.
+
+### 1. Covered Modules
+
+ForbiddenFieldRule
+
+JavaLoggingCallExtractor
+
+PolicyLoader
+
+ReportWriter
+
+StaticLogAnalyzer
+
+### 2. 검증 항목
+
+MatchType 별 동작 정확성
+
+AST 로그 추출 정확성
+
+YAML 파싱 예외 처리
+
+파일 생성 및 디렉토리 자동 생성
+
+빌드 실패 동작 검증
+
+### ForbiddenFieldLoggingRuleTest.java 
+
+✔ matches()
+
+MatchType이 EXACT일 때, 텍스트가 정확히 일치하면 위반(true)을 반환한다.
+
+MatchType이 CONTAINS일 때, 텍스트에 키워드가 포함되어 있으면 위반(true)을 반환한다.
+
+MatchType이 PREFIX/SUFFIX일 때, 시작/끝 단어가 일치하면 위반(true)을 반환한다.
+
+MatchType이 REGEX일 때, 정규표현식 패턴에 매칭되면 위반(true)을 반환한다.
+
+검사할 텍스트가 null인 경우, 에러 없이 정상적으로 false를 반환한다.
+
+### JavaLoggingCallExtractorTest.java 
+
+✔ extract()
+
+log.info를 사용한 내용이 있으면 해당 내용을 List<LogCall>형태로 반환한다.
+
+file의 경로가 java파일 위치가 아니라면 빈 배열을 반환한다.
+
+만약 file의 내용이 비었을 경우 빈 배열을 반환한다.
+
+일반 함수 호출(fqn==null)은 무시하고, 뒤에 있는 log.info는 정상적으로 추출한다.
+
+java 파일 자체에 에러가 존재할 경우 빈 배열을 반환한다.
+
+✔ toMethodFqn()
+
+‘log.-’이 입력되었을 때 동일한 형태로 반환된다.
+
+‘Logger.-’, ‘logger.-’, ‘Log.-’, 이 입력되었을 때 ‘log.-’로 변환된다.
+
+Scope가 존재하지 않는 다면 null을 반환한다.
+
+✔ lastToken()
+
+'.’이 한 개 포함된 텍스트의 경우 ‘.’ 이후 문자열을 반환한다.
+
+‘.’이 한 개 이상 포함된 텍스트의 경우 마지막 ‘.’ 이후 문자열을 반환한다.
+
+### LogArgInspectorTest.java
+
+
+### PolicyLoaderTest.java 
+
+✔ load()
+유효한 YAML 파일을 로드하면 LoggingPolicy 객체가 정상 생성된다.
+
+forbiddenFields가 리스트가 아니면 ParserException("forbiddenFields must be a list") 발생한다.
+
+forbiddenFields의 match 필드가 없으면 기본값 EXACT로 설정된다.
+
+YAML root가 Map이 아니면 ParserException("root is not a map")이 발생한다.
+
+✔ validateFileExtension()
+확장자가 .yml/.yaml이면 예외가 발생하지 않는다
+
+확장자가 yml/yaml이 아니면 ParserException("유효하지 않은 파일 확장자")이 발생한다
+
+### ReportWriterTest.java 
+
+✔ write()
+
+위반 사항(Violation)이 존재할 경우, 상세 내역(File, Line, Rule 등)이 포함된 리포트를 생성한다.
+
+위반 사항이 없을 경우, [OK] 메시지가 담긴 클린 리포트를 생성한다.
+
+리포트 저장 경로의 상위 디렉토리가 없을 경우, 폴더를 자동 생성한 후 파일을 저장한다.
+
+파일 쓰기 권한이 없거나 시스템 오류 발생 시, RuntimeException을 발생시킨다.
+
+### StaticLogAnalyzerTest.java 
+
+---
+## Test Coverage Report
+아래는 jacoco를 통한 테스트 커버리지 측정 결과입니다.
