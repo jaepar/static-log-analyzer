@@ -18,7 +18,7 @@ public class Main {
 
         //args에서 받은 각각 나누어 저장
         Path root = Path.of(opt.getOrDefault("--root", "."));
-        Path policyPath = Path.of(opt.getOrDefault("--policy", "logging-policy.yml"));
+        Path policyPath = Path.of(opt.getOrDefault("--policy", "src/main/resources/logging-policy.yml"));
         Path reportPath = Path.of(opt.getOrDefault("--report", "build/logging-report/report.txt"));
 
         // yml에 있는 내용을 추출하여 LoggingPolicy에 저장
