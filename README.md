@@ -156,81 +156,14 @@ YAML 파싱 예외 처리
 
 빌드 실패 동작 검증
 
-### ForbiddenFieldLoggingRuleTest.java 
-
-✔ matches()
-
-MatchType이 EXACT일 때, 텍스트가 정확히 일치하면 위반(true)을 반환한다.
-
-MatchType이 CONTAINS일 때, 텍스트에 키워드가 포함되어 있으면 위반(true)을 반환한다.
-
-MatchType이 PREFIX/SUFFIX일 때, 시작/끝 단어가 일치하면 위반(true)을 반환한다.
-
-MatchType이 REGEX일 때, 정규표현식 패턴에 매칭되면 위반(true)을 반환한다.
-
-검사할 텍스트가 null인 경우, 에러 없이 정상적으로 false를 반환한다.
-
-### JavaLoggingCallExtractorTest.java 
-
-✔ extract()
-
-log.info를 사용한 내용이 있으면 해당 내용을 List<LogCall>형태로 반환한다.
-
-file의 경로가 java파일 위치가 아니라면 빈 배열을 반환한다.
-
-만약 file의 내용이 비었을 경우 빈 배열을 반환한다.
-
-일반 함수 호출(fqn==null)은 무시하고, 뒤에 있는 log.info는 정상적으로 추출한다.
-
-java 파일 자체에 에러가 존재할 경우 빈 배열을 반환한다.
-
-✔ toMethodFqn()
-
-‘log.-’이 입력되었을 때 동일한 형태로 반환된다.
-
-‘Logger.-’, ‘logger.-’, ‘Log.-’, 이 입력되었을 때 ‘log.-’로 변환된다.
-
-Scope가 존재하지 않는 다면 null을 반환한다.
-
-✔ lastToken()
-
-'.’이 한 개 포함된 텍스트의 경우 ‘.’ 이후 문자열을 반환한다.
-
-‘.’이 한 개 이상 포함된 텍스트의 경우 마지막 ‘.’ 이후 문자열을 반환한다.
-
-### LogArgInspectorTest.java
-
-
-### PolicyLoaderTest.java 
-
-✔ load()
-유효한 YAML 파일을 로드하면 LoggingPolicy 객체가 정상 생성된다.
-
-forbiddenFields가 리스트가 아니면 ParserException("forbiddenFields must be a list") 발생한다.
-
-forbiddenFields의 match 필드가 없으면 기본값 EXACT로 설정된다.
-
-YAML root가 Map이 아니면 ParserException("root is not a map")이 발생한다.
-
-✔ validateFileExtension()
-확장자가 .yml/.yaml이면 예외가 발생하지 않는다
-
-확장자가 yml/yaml이 아니면 ParserException("유효하지 않은 파일 확장자")이 발생한다
-
-### ReportWriterTest.java 
-
-✔ write()
-
-위반 사항(Violation)이 존재할 경우, 상세 내역(File, Line, Rule 등)이 포함된 리포트를 생성한다.
-
-위반 사항이 없을 경우, [OK] 메시지가 담긴 클린 리포트를 생성한다.
-
-리포트 저장 경로의 상위 디렉토리가 없을 경우, 폴더를 자동 생성한 후 파일을 저장한다.
-
-파일 쓰기 권한이 없거나 시스템 오류 발생 시, RuntimeException을 발생시킨다.
-
-### StaticLogAnalyzerTest.java 
-
 ---
 ## Test Coverage Report
 아래는 jacoco를 통한 테스트 커버리지 측정 결과입니다.
+
+<img width="1323" height="340" alt="image" src="https://github.com/user-attachments/assets/ff6ed08e-331e-4f12-8537-f1b713564ce7" />
+<img width="1325" height="256" alt="image" src="https://github.com/user-attachments/assets/5092e843-fcbf-45da-84e1-7c8f65caa97b" />
+<img width="1372" height="310" alt="image" src="https://github.com/user-attachments/assets/6e1750fa-9046-4a40-8cf3-5a6b36de321d" />
+<img width="1302" height="305" alt="image" src="https://github.com/user-attachments/assets/ea5fd84c-b0bb-494f-8e40-c1ecb4deae69" />
+<img width="1295" height="274" alt="image" src="https://github.com/user-attachments/assets/9d0b77b8-9b5b-41d7-80c4-ec03a0cc02c3" />
+<img width="1207" height="190" alt="image" src="https://github.com/user-attachments/assets/e89cbf24-40ee-4ce1-98ac-1a2420d2b2ba" />
+<img width="1564" height="254" alt="image" src="https://github.com/user-attachments/assets/ddf516d8-c86a-462d-a67b-2ba3811fe8f2" />
