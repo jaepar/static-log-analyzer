@@ -8,3 +8,5 @@ target/
 bin/
 build/
 *.class
+.gradle/
+.factorypath
