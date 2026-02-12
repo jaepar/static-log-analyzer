@@ -145,6 +145,7 @@ ReportWriter
 StaticLogAnalyzer
 
 ### 2. 검증 항목
+자세한 테스트 시나리오는 [testScenario.md](./testScenario.md) 에서 확인할 수 있습니다.
 
 MatchType 별 동작 정확성
 
@@ -160,10 +161,11 @@ YAML 파싱 예외 처리
 ## Test Coverage Report
 아래는 jacoco를 통한 테스트 커버리지 측정 결과입니다.
 
-<img width="1323" height="340" alt="image" src="https://github.com/user-attachments/assets/ff6ed08e-331e-4f12-8537-f1b713564ce7" />
-<img width="1325" height="256" alt="image" src="https://github.com/user-attachments/assets/5092e843-fcbf-45da-84e1-7c8f65caa97b" />
-<img width="1372" height="310" alt="image" src="https://github.com/user-attachments/assets/6e1750fa-9046-4a40-8cf3-5a6b36de321d" />
-<img width="1302" height="305" alt="image" src="https://github.com/user-attachments/assets/ea5fd84c-b0bb-494f-8e40-c1ecb4deae69" />
-<img width="1295" height="274" alt="image" src="https://github.com/user-attachments/assets/9d0b77b8-9b5b-41d7-80c4-ec03a0cc02c3" />
-<img width="1207" height="190" alt="image" src="https://github.com/user-attachments/assets/e89cbf24-40ee-4ce1-98ac-1a2420d2b2ba" />
-<img width="1564" height="254" alt="image" src="https://github.com/user-attachments/assets/ddf516d8-c86a-462d-a67b-2ba3811fe8f2" />
+<img width="1344" height="350" alt="image" src="https://github.com/user-attachments/assets/a2029ca6-0a05-4613-b2cb-4005d4c4c779" />
+<img width="1273" height="252" alt="image" src="https://github.com/user-attachments/assets/07c5d21b-5115-4518-84b7-c4e724c6af6e" />
+<img width="1304" height="309" alt="image" src="https://github.com/user-attachments/assets/72c9891a-a5d5-452f-ba4e-57453d5f5c70" />
+<img width="1219" height="281" alt="image" src="https://github.com/user-attachments/assets/65be302a-a958-43cf-a6ce-bf26767201dc" />
+<img width="1093" height="198" alt="image" src="https://github.com/user-attachments/assets/fb5715f8-4525-41a1-8d43-957afb0c13d7" />
+<img width="1549" height="246" alt="image" src="https://github.com/user-attachments/assets/878dd6bc-98aa-4140-899f-220a8856bcbf" />
+
+
