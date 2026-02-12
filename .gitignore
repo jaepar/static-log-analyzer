@@ -1,4 +1,10 @@
 # build된 결과물이 저장되는 directory
 target/
-
-# 
+.metadata
+.classpath
+.project
+.settings/
+.loadpath
+bin/
+build/
+*.class

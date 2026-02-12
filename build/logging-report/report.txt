@@ -1,7 +1,0 @@
-[LOGGING VIOLATION] Logging policy violation detected
-File: ./src/main/java/sample/LoginService.java
-Line: 12
-Rule: FORBIDDEN_FIELD_LOGGING
-Message: Variable/Token 'password' is logged via log.info
-Code: log.info("password" + password)
-
